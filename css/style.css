@@ -1,0 +1,377 @@
+ /* General */
+	h3 {
+		margin: 0;
+		width: 100%;
+		padding-left: 5px;
+		font-size: 14px;
+		font-family: sans-serif;
+		box-sizing: border-box;
+		border-bottom: 1px solid #000000;
+	}
+
+	h4 {
+		margin: 0;
+		width: 100%;
+		padding-left: 5px;
+		font-size: 12px;
+		font-family: sans-serif;
+		box-sizing: border-box;
+		border-bottom: 1px solid #000000;
+		text-align: center;
+	}
+
+	h5 {
+		margin: 0;
+		width: 100%;
+		padding-left: 5px;
+		font-size: 10px;
+		font-family: sans-serif;
+		box-sizing: border-box;
+		border-bottom: 1px solid #000000;
+		text-align: center;
+	}
+
+	p {
+		margin: 0;
+		width: 100%;
+		padding-left: 5px;
+		font-size: 10px;
+		font-family: sans-serif;
+		box-sizing: border-box;
+		float: left;
+	}
+
+		p span {
+			height: 11px;
+			width: 50%;
+			float: left;
+		}
+		p span.label {
+			font-weight: bold;
+		}
+		p span.label:after {
+			content: ":";
+			float: right;
+		}
+		p span.value {
+			text-align: center;
+		}
+
+	body {
+		margin: 0;
+		background: url(../images/bg.jpg);
+    		background-repeat: no-repeat;
+    		background-color: #ffffff!important;
+    		background-position: center top;
+	}
+
+		header {
+			text-align: center;
+		}
+
+		div#main {
+		    width: 700px;
+		    border: 1px solid #000000;
+		    box-sizing: border-box;
+		    margin: 0 auto 20px;
+		    position: relative;
+	        overflow: hidden;
+		}
+
+			button.show_form {
+			    background: transparent;
+			    padding: 0;
+			    width: 0;
+			    height: 0;
+			    border-left: 10px solid transparent;
+			    border-top: 10px solid rgba(0,0,0,1);
+			    border-bottom: 0;
+			    border-right: 10px solid transparent;
+			    position: absolute;
+			    top: 0;
+			    right: -20px;
+			    opacity: 1;
+			}
+			button.show_form:focus {
+				outline: none;
+			}
+			button.show_form:not(.disabled) {
+				display: none;
+			}
+			button.show_form.active {
+				border-bottom: 10px solid rgba(0,0,0,1);
+			    border-top: 0;
+			    top: 40px;
+			    right: -259px;
+			}			
+
+	/* Form */
+		#form_page input, #form_page select {
+			width: 100%;
+			float: left;
+			box-sizing: border-box;
+		}
+		#form_page div#main {
+		    height: auto;
+		    overflow: hidden;
+		}
+
+	/* Header */
+
+		header {
+		    width: 700px;
+		    box-sizing: border-box;
+		    margin: auto;
+		    position: relative;
+		    overflow: hidden;
+		}
+
+			header nav {
+				float: left;
+			}
+			header nav#account_menu {
+				width: 80%;
+			}
+			header nav#main_menu {
+				float: right;
+				width: 20%;
+			}
+
+				header nav ul {
+					list-style: none;
+					padding: 0;
+					margin: 0;
+					overflow: hidden;
+					width: 100%;
+					float: left;
+				    height: 30px;
+				    line-height: 20px;
+				    box-sizing: border-box;
+				}
+
+					header nav ul li {
+						float: left;
+						box-sizing: border-box;
+						padding: 0 1%;
+						line-height: 30px;
+					}
+					header nav ul li:after {
+						content: ' | ';
+					}
+
+					header nav ul li:last-of-type:after {
+						content: '';
+					}
+
+	/* Customers */
+
+		#customers {
+			width: 100%;
+			overflow: hidden;
+		}
+
+			#customers .customer {
+				width: 25%;
+				box-sizing: border-box;
+				padding: 1%;
+				float: left;
+			}
+
+				.customer h3 {
+					border: 1px solid #000000;
+					border-bottom: 0;
+					padding: 5px;
+					box-sizing: border-box;
+				}
+
+				.customer .actions {
+					padding: 5px;
+					width: 100%;
+					float: left;
+					box-sizing: border-box;
+					border: 1px solid #000000;
+				}
+
+					.customer .actions input[type="submit"] {
+						width: 100%;
+					}
+
+	/* Events */
+
+	#events {
+		width: 100%;
+		overflow: hidden;
+	}
+
+		#events .event {
+			width: 25%;
+			box-sizing: border-box;
+			padding: 1%;
+			float: left;
+		}
+		#events .event.updated h3, #events .event.updated .actions {
+			border-color: blue;
+		}
+
+			.event h3 {
+				border: 1px solid #000000;
+				border-bottom: 0;
+				padding: 5px;
+				box-sizing: border-box;
+			}
+
+			.event .actions {
+				width: 100%;
+				float: left;
+				box-sizing: border-box;
+				border: 1px solid #000000;
+			}
+
+				.event .actions .action {
+					float: left;
+					width: 100%;
+					border-top: 1px solid #000000;
+					padding: 0 5px;
+					box-sizing: border-box;
+				}
+				.event .actions .action:first-of-type {
+					border-top: 0;
+				}
+				.event .actions .action.updated {
+					background: rgba(0,0,255,0.25);
+				}
+
+					.actions .action a {
+						text-decoration: none;
+					}
+					.event .actions .action.updated a {
+						color: #ffffff;
+					}
+
+
+	/* Credits */
+		.credit_row {
+			width: 100%;
+			padding: 0 10px;
+		    overflow: hidden;
+	        box-sizing: border-box;
+		}
+		.credit_row:first-of-type {
+			margin-top: 10px;
+		}
+		.credit_row:last-of-type {
+			margin-bottom: 10px;
+		}
+
+			.credit_row_container_8 {
+				display: block;
+				width: 66.666666666%;
+				margin: auto;
+				overflow: hidden;
+			}
+
+				.credit_option {
+			        width: 33.333333333%;
+				    float: left;
+				    box-sizing: border-box;
+				    padding: 10px;
+				    border: 1px solid #000000;
+				    border-bottom: 0;
+				}
+				.credit_option.half {
+					width: 50%;
+				}
+				.credit_option.half:first-of-type{
+					border-right: 0;
+				}
+				.credit_option.single {
+				    float: none;
+				    display: block;
+				    margin: auto;
+				}
+				.credit_option.third {
+					border-bottom: 1px solid #000000;
+				}
+				.credit_option.third:nth-of-type(2n){
+					border-left: 0;
+					border-right: 0;
+				}
+
+			.credit_option h3 {
+				border: 0;
+				font-size: 20px;
+				font-weight: bold;
+				margin-bottom: 20px;
+				text-align: center;
+				display: block;
+				width: 100%;
+				float: none;
+				padding: 0;
+			}
+
+			.credit_option p {
+				margin: 0 0 10px;
+				font-size: 14px;
+				font-weight: normal;
+				border: 0;
+				text-align: center;
+			}
+
+			.credit_option input[type="submit"]{
+				display: block;
+				margin: auto;
+				text-align: center;
+				width: 100%;
+			    box-sizing: border-box;
+    			padding: 5px;
+			}
+
+			.credit_option input[type="number"]{
+				width: 100%;
+				margin-bottom: 10px;
+				box-sizing: border-box;
+			}
+
+			.credit_option input[type="range"] {
+			    width: 80%;
+			    margin-bottom: 10px;
+			    float: left;
+				box-sizing: border-box;
+			}
+
+			.credit_option output {
+			    float: right;
+    			margin-top: 3px;
+			}
+
+			.credit_option .field {
+				margin-bottom: 10px;
+			}
+
+	/* Purchases */
+
+		table#purchases {
+			width: 100%;
+		}
+
+			table#purchases tr {
+
+			}
+			table#purchases tr.active {
+				background: rgba(0,255,0,0.25);
+			}
+			table#purchases tr.expired {
+				background: rgba(255,0,0,0.25);
+			}
+
+				table#purchases td {
+					text-align: center;
+				}
+
+/* Theming */
+	
+	/* General */
+		/* Page background */
+		body {
+			background-color: #4DB747;
+		}
