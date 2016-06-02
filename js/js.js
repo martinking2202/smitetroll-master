@@ -333,4 +333,37 @@ jQuery(document).ready(function(){
             });
         }
     });
+
+    /* Graph */
+    jQuery('#graph .count').each(function(index){
+        var thisCount = jQuery(this);
+        var countCount = jQuery('.count').length;
+        var countWidth = 100 / countCount;
+
+        if(countCount < 4) {
+            var countOffset = index * 25;
+        }
+        else {
+            var countOffset = index * countWidth;
+        }
+        jQuery(thisCount).css({
+            'width' : countWidth+'%',
+            'left' : countOffset+'%'
+        });
+
+        
+        var maxAmount = parseInt(jQuery('#highestAmount').html());
+
+        jQuery(thisCount).children('.bar').each(function(){
+            // Check if donation amount is above current max amount. Update max amount if so
+            var amount = parseInt(jQuery(this).attr('data-bar-value'));
+            var barHeight = 0;
+            
+            barHeight = ((100 / Math.abs(maxAmount)) * amount);
+            
+            jQuery(this).css({
+                'height' : barHeight+'%'
+            });
+        });
+    });
 });

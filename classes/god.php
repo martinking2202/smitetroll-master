@@ -161,5 +161,25 @@
                 WHERE count_name = '$god_name'
             ");
         }
+
+        public function god_rerolls($order){
+            $gods = array();
+            $godCounts = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_type = 'god' ORDER BY $order DESC");   
+            while ($god = $godCounts->fetch_assoc()) {
+                $godName = $god['count_name'];
+                $godCount = $god['count'];
+                $godRerolls = $god['rerolls'];
+                
+                $getGodImage = mysqli_query($this->connection, "SELECT god_image FROM gods WHERE god_name = '$godName'");
+                $godImage = mysqli_fetch_assoc($getGodImage);
+                $gods[$godName] = array(
+                    'count' => $godCount,
+                    'rerolls' => $godRerolls,
+                    'image' => $godImage['god_image']
+                );
+            }
+
+            return $gods;
+        }
   	}
 ?>

@@ -82,9 +82,8 @@
                 );
 
                 $retItem = $itemRow['item_name'];
-                $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$retItem'");
-                
-                if($itemCount){
+                $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '".$retItem."'");
+                if(isset($itemCount->num_rows) && $itemCount->num_rows || $itemCount){
                     $row = mysqli_fetch_assoc($itemCount);
                     if($row['count']) {
                         $count = intval($row['count']) + 1;
@@ -112,6 +111,7 @@
                             0
                         )"
                     );
+
                 }
                 
                 $i++;
@@ -302,5 +302,46 @@
                 WHERE count_name = '$item_name'
             ");
         }
+
+        public function item_rerolls($order){
+            $items = array();
+            $itemCounts = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_type = 'item' ORDER BY $order DESC");   
+            while ($item = $itemCounts->fetch_assoc()) {
+                $itemName = $item['count_name'];
+                $itemCount = $item['count'];
+                $itemRerolls = $item['rerolls'];
+                
+                $getItemImage = mysqli_query($this->connection, "SELECT item_image FROM items WHERE item_name = '$itemName'");
+                $itemImage = mysqli_fetch_assoc($getItemImage);
+                $items[$itemName] = array(
+                    'count' => $itemCount,
+                    'rerolls' => $itemRerolls,
+                    'image' => $itemImage['item_image']
+                );
+            }
+
+            return $items;
+        }
+
+        public function relic_rerolls($order){
+            $relics = array();
+            $relicCounts = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_type = 'relic' ORDER BY $order DESC");   
+            while ($relic = $relicCounts->fetch_assoc()) {
+                $relicName = $relic['count_name'];
+                $relicCount = $relic['count'];
+                $relicRerolls = $relic['rerolls'];
+                
+                $getRelicImage = mysqli_query($this->connection, "SELECT item_image FROM items WHERE item_name = '$relicName'");
+                $relicImage = mysqli_fetch_assoc($getRelicImage);
+                $relics[$relicName] = array(
+                    'count' => $relicCount,
+                    'rerolls' => $relicRerolls,
+                    'image' => $relicImage['item_image']
+                );
+            }
+
+            return $relics;
+        }
+
   	}
 ?>

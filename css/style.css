@@ -59,7 +59,8 @@
 
 	body {
 		margin: 0;
-    		background: #000000;
+		background: #000000;
+		overflow: hidden;
 		/*
 		background: url(../images/bg.jpg);
 		background-repeat: no-repeat;
@@ -182,210 +183,6 @@
 						content: '';
 					}
 
-	/* Customers */
-
-		#customers {
-			width: 100%;
-			overflow: hidden;
-		}
-
-			#customers .customer {
-				width: 25%;
-				box-sizing: border-box;
-				padding: 1%;
-				float: left;
-			}
-
-				.customer h3 {
-					border: 1px solid #000000;
-					border-bottom: 0;
-					padding: 5px;
-					box-sizing: border-box;
-				}
-
-				.customer .actions {
-					padding: 5px;
-					width: 100%;
-					float: left;
-					box-sizing: border-box;
-					border: 1px solid #000000;
-				}
-
-					.customer .actions input[type="submit"] {
-						width: 100%;
-					}
-
-	/* Events */
-
-	#events {
-		width: 100%;
-		overflow: hidden;
-	}
-
-		#events .event {
-			width: 25%;
-			box-sizing: border-box;
-			padding: 1%;
-			float: left;
-		}
-		#events .event.updated h3, #events .event.updated .actions {
-			border-color: blue;
-		}
-
-			.event h3 {
-				border: 1px solid #000000;
-				border-bottom: 0;
-				padding: 5px;
-				box-sizing: border-box;
-			}
-
-			.event .actions {
-				width: 100%;
-				float: left;
-				box-sizing: border-box;
-				border: 1px solid #000000;
-			}
-
-				.event .actions .action {
-					float: left;
-					width: 100%;
-					border-top: 1px solid #000000;
-					padding: 0 5px;
-					box-sizing: border-box;
-				}
-				.event .actions .action:first-of-type {
-					border-top: 0;
-				}
-				.event .actions .action.updated {
-					background: rgba(0,0,255,0.25);
-				}
-
-					.actions .action a {
-						text-decoration: none;
-					}
-					.event .actions .action.updated a {
-						color: #ffffff;
-					}
-
-
-	/* Credits */
-		.credit_row {
-			width: 100%;
-			padding: 0 10px;
-		    overflow: hidden;
-	        box-sizing: border-box;
-		}
-		.credit_row:first-of-type {
-			margin-top: 10px;
-		}
-		.credit_row:last-of-type {
-			margin-bottom: 10px;
-		}
-
-			.credit_row_container_8 {
-				display: block;
-				width: 66.666666666%;
-				margin: auto;
-				overflow: hidden;
-			}
-
-				.credit_option {
-			        width: 33.333333333%;
-				    float: left;
-				    box-sizing: border-box;
-				    padding: 10px;
-				    border: 1px solid #000000;
-				    border-bottom: 0;
-				}
-				.credit_option.half {
-					width: 50%;
-				}
-				.credit_option.half:first-of-type{
-					border-right: 0;
-				}
-				.credit_option.single {
-				    float: none;
-				    display: block;
-				    margin: auto;
-				}
-				.credit_option.third {
-					border-bottom: 1px solid #000000;
-				}
-				.credit_option.third:nth-of-type(2n){
-					border-left: 0;
-					border-right: 0;
-				}
-
-			.credit_option h3 {
-				border: 0;
-				font-size: 20px;
-				font-weight: bold;
-				margin-bottom: 20px;
-				text-align: center;
-				display: block;
-				width: 100%;
-				float: none;
-				padding: 0;
-			}
-
-			.credit_option p {
-				margin: 0 0 10px;
-				font-size: 14px;
-				font-weight: normal;
-				border: 0;
-				text-align: center;
-			}
-
-			.credit_option input[type="submit"]{
-				display: block;
-				margin: auto;
-				text-align: center;
-				width: 100%;
-			    box-sizing: border-box;
-    			padding: 5px;
-			}
-
-			.credit_option input[type="number"]{
-				width: 100%;
-				margin-bottom: 10px;
-				box-sizing: border-box;
-			}
-
-			.credit_option input[type="range"] {
-			    width: 80%;
-			    margin-bottom: 10px;
-			    float: left;
-				box-sizing: border-box;
-			}
-
-			.credit_option output {
-			    float: right;
-    			margin-top: 3px;
-			}
-
-			.credit_option .field {
-				margin-bottom: 10px;
-			}
-
-	/* Purchases */
-
-		table#purchases {
-			width: 100%;
-		}
-
-			table#purchases tr {
-
-			}
-			table#purchases tr.active {
-				background: rgba(0,255,0,0.25);
-			}
-			table#purchases tr.expired {
-				background: rgba(255,0,0,0.25);
-			}
-
-				table#purchases td {
-					text-align: center;
-				}
 
 /* Theming */
 	
@@ -563,3 +360,166 @@
 		div#count:hover, div#reroll-all:hover {
 		    background: rgba(0,0,0,0.75);
 		}
+
+/* Graph */
+
+	#graphContainer {
+		width: 90%;
+	    height: 90%;
+	    display: block;
+	    position: absolute;
+	    top: 5%;
+	    left: 5%;
+	}
+		div#navControls {
+			margin-bottom: 10px;
+		    float: left;
+    		width: 100%;
+		}
+
+			div#navControls > ul {
+				float: left;
+				list-style: none;
+				color: #ffffff;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				border: 1px solid #ffffff;
+				box-sizing: border-box;
+			}
+
+				div#navControls > ul > li {
+					float: left;
+					color: #ffffff;
+					padding: 10px;
+					position: relative;
+				    width: 33.33%;
+				    box-sizing: border-box;
+				    text-align: center;
+				    border-right: 1px solid #ffffff;
+				}
+				div#navControls > ul > li:last-of-type {
+					border-right: 0;
+				}
+
+					div#navControls > ul > li a {
+						color: #ffffff;
+						text-decoration: none;
+					}
+
+		div#graph {
+		    position: relative;
+		    width: 100%;
+		    height: 100%;
+		    top: 0;
+		    left: 0;
+		    box-sizing: border-box;
+		    z-index: 1;
+		    float: left;
+		}
+
+		div#highestAmount {
+			text-align: center;
+			position: absolute;
+			top: 0;
+			left: -40px;
+		    color: white;
+		}		
+
+		div#graphData {
+		    position: absolute;
+		    width: calc(100% - 2px);
+		    height: 90%;
+		    top: 0;
+		    left: 0;
+		    z-index: 1;
+		    background: #ffffff;
+		    border-left: 2px solid blue;
+		    border-bottom: 2px solid blue;
+		}
+
+		#graph .count {
+			position: absolute;
+			width: auto;
+			max-width: 25%;
+			height: 100%;
+			bottom: 0;
+			transition: height linear 1s;
+			box-sizing: border-box;
+		    border-right: 1px solid #000000;
+		}
+
+			#graph .bar, #graph .bar, #graph .bar {
+				position: absolute;
+				width: 50%;
+			    text-align: center;
+			    opacity: 0.5;
+			    bottom: 0;
+			}
+			#graph .bar.roll {
+				background: green;
+			}
+			#graph .bar.reroll {
+				background: red;
+			    left: 50%;
+			}
+			#graph .bar.full {
+				width: 100%;
+			}
+			#graph .bar.hide {
+				width: 0%;
+			}
+
+			#graph .count img {
+			    position: absolute;
+			    width: 100%;
+			    height: auto;
+			    bottom: 0;
+			    z-index: 1;
+			    background: #ffffff;
+			}
+
+			#graph .count > img {
+			    margin-bottom: calc(-100% - 3px);
+			}
+
+			#graph .count .info {
+			    width: 100px;
+			    position: absolute;
+			    display: none;
+			    background: rgba(255,255,255,0.75);
+			    border: 1px solid #000000;
+			    padding: 0;
+			    z-index: 1;
+			    margin: 0 auto;
+			    left: 0;
+			    right: 0;
+			}
+			#graph .count:hover .info {
+				display: block;
+			}
+
+				#graph .count .info img {
+					width: 100%;
+					float: left;
+					position: static;
+				}
+
+				#graph .count .info .text {
+					float: right;
+					padding: 5px;
+				    width: 100%;
+    				box-sizing: border-box;
+				}
+
+					#graph .count .info h5, #graph .count .info h6 {
+						margin: 0;
+					}
+					#graph .count .info h5 {
+						text-decoration: none;
+						border: 0;
+						margin-bottom: 5px;
+						font-size: 12px;
+					}
+
+			
