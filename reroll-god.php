@@ -11,4 +11,6 @@
 
 	$ret_god = $god->get_random_god($excluded_gods, $_POST['god_type']);
 
+	$rerolled = $god->reroll_log($_POST['rerolled']);
+
 	echo json_encode($ret_god);

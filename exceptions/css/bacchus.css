@@ -1,0 +1,11 @@
+@keyframes drunkinate {
+    0% 	{transform: rotate(0deg);}
+    25% 	{transform: rotate(20deg);}
+    75% 	{transform: rotate(-20deg);}
+    100% 	{transform: rotate(0deg);}
+}
+
+div#god {
+    animation-name: drunkinate;
+    animation-duration: 5s;
+}

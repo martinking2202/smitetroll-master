@@ -9,31 +9,195 @@
 	          $this->connection = $connection;
         }
         
+        public function initial_get_items($item_type = '') {
+            $bootsSQL = "SELECT * FROM items WHERE item_type = 'boots-$item_type' ORDER BY RAND() LIMIT 1";
+            $itemsSQL = "SELECT * FROM items WHERE item_type = '$item_type' OR item_type = '' ORDER BY RAND() LIMIT 5";             
+            $relicsSQL = "SELECT * FROM items WHERE item_type = 'relic' ORDER BY RAND() LIMIT 2";   
+
+            $get_boots = mysqli_query($this->connection, $bootsSQL);
+            $bootsRow = mysqli_fetch_assoc($get_boots);
+
+            
+            if($bootsRow['item_image']) {
+                $item_image = $bootsRow['item_image'];
+            }
+            else {
+                $item_image = 'images/hi.jpg';
+            }
+            
+            $item_info = array(
+                'boots' => array(
+                    'id' => $bootsRow['item_id'],
+                    'name' => $bootsRow['item_name'],
+                    'image' => $item_image
+                )
+            );
+
+            $retItem = $bootsRow['item_name'];
+            $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$retItem'");
+            
+            $row = mysqli_fetch_assoc($itemCount);
+            if($row['count']) {
+                $count = intval($row['count']) + 1;
+
+                mysqli_query($this->connection, "UPDATE counts SET
+                    count = $count
+                    WHERE count_name = '$retItem'
+                ");
+            }
+            else {
+                $addPing = mysqli_query(
+                    $this->connection,"INSERT INTO counts (
+                        count_id,
+                        count_name,
+                        count_type,
+                        count,
+                        rerolls
+                    )
+                    VALUES (
+                        NULL,
+                        '$retItem',
+                        'item',
+                        1,
+                        0
+                    )"
+                );
+            }
+
+            $get_items = mysqli_query($this->connection, $itemsSQL);
+
+            $i = 2;
+            while ($itemRow = $get_items->fetch_assoc()) {
+                if($itemRow['item_image']) {
+                    $item_image = $itemRow['item_image'];
+                }
+                else {
+                    $item_image = 'images/hi.jpg';
+                }
+                
+                $item_info['item'.$i] = array(
+                    'id' => $itemRow['item_id'],
+                    'name' => $itemRow['item_name'],
+                    'image' => $item_image
+                );
+
+                $retItem = $itemRow['item_name'];
+                $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$retItem'");
+                
+                if($itemCount){
+                    $row = mysqli_fetch_assoc($itemCount);
+                    if($row['count']) {
+                        $count = intval($row['count']) + 1;
+
+                        mysqli_query($this->connection, "UPDATE counts SET
+                            count = $count
+                            WHERE count_name = '$retItem'
+                        ");
+                    }
+                }
+                else {
+                    $addPing = mysqli_query(
+                        $this->connection,"INSERT INTO counts (
+                            count_id,
+                            count_name,
+                            count_type,
+                            count,
+                            rerolls
+                        )
+                        VALUES (
+                            NULL,
+                            '$retItem',
+                            'item',
+                            1,
+                            0
+                        )"
+                    );
+                }
+                
+                $i++;
+            }
+
+            $get_relics = mysqli_query($this->connection, $relicsSQL);
+
+            $r = 1;
+            while ($relicRow = $get_relics->fetch_assoc()) {
+                if($relicRow['item_image']) {
+                    $item_image = $relicRow['item_image'];
+                }
+                else {
+                    $item_image = 'images/hi.jpg';
+                }
+                $item_info['relic'.$r] = array(
+                    'id' => $relicRow['item_id'],
+                    'name' => $relicRow['item_name'],
+                    'image' => $item_image
+                );
+
+                $retItem = $relicRow['item_name'];
+                $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$retItem'");
+                
+                $row = mysqli_fetch_assoc($itemCount);
+                if($row['count']) {
+                    $count = intval($row['count']) + 1;
+
+                    mysqli_query($this->connection, "UPDATE counts SET
+                        count = $count
+                        WHERE count_name = '$retItem'
+                    ");
+                }
+                else {
+                    $addPing = mysqli_query(
+                        $this->connection,"INSERT INTO counts (
+                            count_id,
+                            count_name,
+                            count_type,
+                            count,
+                            rerolls
+                        )
+                        VALUES (
+                            NULL,
+                            '$retItem',
+                            'relic',
+                            1,
+                            0
+                        )"
+                    );
+                }
+                $r++;
+            }
+
+            return $item_info;
+            
+        }
+
         public function get_random_item($excluded_items = '', $item_type = '') {
             $exclusions = '';
             $sql = "SELECT * FROM items ";
+            $ping_type = $item_type;
             if($excluded_items){
                 if($item_type){
                     if($item_type === 'relic'){
-                        $exclusions = "WHERE item_type = '$item_type' AND item_id != $excluded_items[0]";
+                        $exclusions = "WHERE item_type = '$item_type' AND item_id NOT IN ($excluded_items[0]";
                     }
                     else {
+                        $ping_type = 'item';
                         if(strpos($item_type, 'boots') !== FALSE){
-                            $exclusions = "WHERE item_type = '$item_type' AND item_id != $excluded_items[0]";
+                            $exclusions = "WHERE item_type = '$item_type' AND item_id NOT IN ($excluded_items[0]";
                         }
                         else {
-                            $exclusions = "WHERE item_type = '' OR item_type = '$item_type' AND item_id != $excluded_items[0]";
+                            $exclusions = "WHERE item_type IN ('','$item_type') AND item_id NOT IN ($excluded_items[0]";
                         }
                     }
                 }
                 else {
-                    $exclusions = "WHERE item_id != $excluded_items[0]";
+                    $exclusions = "WHERE item_id NOT IN ($excluded_items[0]";
                 }
                 if(sizeof($excluded_items) > 1){
                     for($i = 1; $i < sizeof($excluded_items); $i++){
-                        $exclusions .= ' AND item_id != '.$excluded_items[$i];
+                        $exclusions .= ','.$excluded_items[$i];
                     }
                 }
+                $exclusions .= ')';
             }
             else {
                 if($item_type){
@@ -58,12 +222,52 @@
             
             $row = mysqli_fetch_assoc($get_item);
 
+            if($row['item_image']) {
+                $item_image = $row['item_image'];
+            }
+            else {
+                $item_image = 'images/hi.jpg';
+            }
             $item_info = array(
-                'id' => $row['item_id'],
-                'name' => $row['item_name']
+                'itemid' => $row['item_id'],
+                'itemname' => $row['item_name'],
+                'itemimage' => $item_image
             );
 
-            return $item_info;
+            $retItem = $row['item_name'];
+            $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$retItem'");
+            
+            $row = mysqli_fetch_assoc($itemCount);
+            if($row['count']) {
+                $count = intval($row['count']) + 1;
+
+                mysqli_query($this->connection, "UPDATE counts SET
+                    count = $count
+                    WHERE count_name = '$retItem'
+                ");
+            }
+            else {
+                $addPing = mysqli_query(
+                    $this->connection,"INSERT INTO counts (
+                        count_id,
+                        count_name,
+                        count_type,
+                        count,
+                        rerolls
+                    )
+                    VALUES (
+                        NULL,
+                        '$retItem',
+                        '$ping_type',
+                        1,
+                        0
+                    )"
+                );
+            }
+
+            $itemJSON = json_encode($item_info);
+            
+            return $itemJSON;
         }
 
         public function insert_item($item_name, $item_type = '') {
@@ -71,17 +275,32 @@
                 $this->connection,"INSERT INTO items (
                     item_id,
                     item_name,
-                    item_type
+                    item_type,
+                    item_image
                 )
                 VALUES (
                     NULL,
                     '$item_name',
-                    '$item_type'
+                    '$item_type',
+                    ''
                 )"
             );
 
             $item_id = $this->connection->insert_id;
             return "$item_name inserted as item ID: $item_id";
+        }
+
+        public function reroll_log($item_name) {
+            $itemCount = mysqli_query($this->connection, "SELECT * FROM counts WHERE count_name = '$item_name'");
+            
+            $row = mysqli_fetch_assoc($itemCount);
+
+            $count = intval($row['rerolls']) + 1;
+
+            mysqli_query($this->connection, "UPDATE counts SET
+                rerolls = $count
+                WHERE count_name = '$item_name'
+            ");
         }
   	}
 ?>

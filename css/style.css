@@ -59,10 +59,13 @@
 
 	body {
 		margin: 0;
+    		background: #000000;
+		/*
 		background: url(../images/bg.jpg);
-    		background-repeat: no-repeat;
-    		background-color: #ffffff!important;
-    		background-position: center top;
+		background-repeat: no-repeat;
+		background-color: #ffffff!important;
+		background-position: center top;
+		*/
 	}
 
 		header {
@@ -70,13 +73,29 @@
 		}
 
 		div#main {
-		    width: 700px;
-		    border: 1px solid #000000;
-		    box-sizing: border-box;
-		    margin: 0 auto 20px;
+		    width: 776px;
+		    margin: 20px auto 20px;
 		    position: relative;
-	        overflow: hidden;
-		}
+		}	
+
+			div#god {
+			    overflow: hidden;
+			    border: 1px solid #ffffff;
+			    border-right: 0;
+			    width: 100%;
+			    float: left;
+			    position: relative;
+			}
+
+				div#god-overlay {
+				    position: absolute;
+				    top: 0;
+				    left: 0;
+				    width: 100%;
+				    height: 100%;
+				    z-index: 10;
+				    background: rgba(0,0,0,0.25);
+				}
 
 			button.show_form {
 			    background: transparent;
@@ -84,7 +103,7 @@
 			    width: 0;
 			    height: 0;
 			    border-left: 10px solid transparent;
-			    border-top: 10px solid rgba(0,0,0,1);
+			    border-top: 10px solid #ffffff;
 			    border-bottom: 0;
 			    border-right: 10px solid transparent;
 			    position: absolute;
@@ -370,8 +389,177 @@
 
 /* Theming */
 	
-	/* General */
-		/* Page background */
-		body {
-			background-color: #4DB747;
+	.god {
+	    width: 389px;
+	    height: 512px;
+	    float: left;
+	    position: relative;
+	    background: #ffffff;
+	    border-right: 1px solid #ffffff;
+	    box-sizing: border-box;
+	}	
+	.god:hover .god-reroll {
+		opacity: 1;
+	}
+
+		.god h1 {
+			width: 100%;
+			float: left;
+			text-align: center;
+			padding: 10px 0;
+			color: #ffffff;
+			background: rgba(0,0,0,0.5);
+			font-size: 24px;
+			margin-top: 0;
+			top: 0;
+			left: 0;
+			box-sizing: border-box;
+			position: absolute;
+			z-index: 1;
+		}
+
+		.god img.god_image {
+			width: 388px;
+			height: 512px;
+		}
+
+		.god .god-reroll {
+		    box-sizing: border-box;
+		    background: rgba(0,0,0,0.5);
+		    position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		    box-sizing: border-box;
+		    background: rgba(0,0,0,0.5);
+		    color: #ffffff;
+		    font-size: 88px;
+		    padding: 200px 165px;
+		    opacity: 0;
+		    transition: all linear 0.25s;
+		}
+
+	.items {
+		width: calc(50% - 1px);
+		float: right;
+	}
+
+		.item {
+			float: left;
+			width: 128px;
+			height: 128px;
+		    border-bottom: 1px solid #ffffff;
+		    border-left: 1px solid #ffffff;
+		    position: relative;
+		    background: #ffffff;
+		}
+		.item:nth-of-type(3n-2) {
+			border-left: 0;
+		}
+		.item:nth-of-type(3n), .relic:last-of-type {
+		    border-right: 1px solid #ffffff;
+		}
+		.item:hover .reroll {
+			opacity: 1;
+		}
+
+			.item .reroll {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				padding: 45px;
+			    box-sizing: border-box;
+			    font-size: 44px;
+			    background: rgba(0,0,0,0.5);
+			    color: #ffffff;
+			    opacity: 0;
+			    transition: all linear 0.25s;
+			    z-index: 2;
+			}
+
+			.item h2 {
+				width: 100%;
+				float: left;
+				text-align: center;
+				padding: 10px 0;
+				color: #ffffff;
+				background: rgba(0,0,0,0.5);
+		        font-size: 12px;
+    			font-weight: normal;
+   				margin-top: 0;
+   				position: absolute;
+   				z-index: 1;
+   				top: 0;
+   				left: 0;
+   				box-sizing: border-box;
+			    line-height: 27px;
+			}
+
+			.item img.item_image {
+				width: 128px;
+				height: 128px;
+			}
+
+	.relics {
+		width: calc(50% - 1px);
+		float: right;
+	}
+
+		.relic {
+			float: left;
+			width: 50%;
+			box-sizing: border-box;
+			background: #000000;
+			height: 130px;
+			border-left-color: #ffffff;
+		}
+
+			.relic img.relic_image {
+				width: 128px;
+				height: 128px;
+				display: block;
+				margin: auto;
+			}
+			.relic .reroll {
+				padding: 45px 75px;
+			}
+
+	#empty-space {
+		border-right: 1px solid #ffffff;
+		width: calc(50% - 1px);
+		float: right;
+	    box-sizing: border-box;
+    	height: 124px;
+	}
+
+		div#count {
+		    height: 124px;
+		    width: 124px;
+		    background: rgba(0,0,0,0.5);
+	        float: left;
+            font-size: 54px;
+		    padding: 30px 50px;
+		    box-sizing: border-box;
+		    color: #ffffff;
+		    border-right: 1px solid #ffffff;
+		    cursor: default;
+		}
+
+		div#reroll-all {
+		    height: 124px;
+		    width: 262px;
+		    background: rgba(0,0,0,0.5);
+		    float: left;
+		    box-sizing: border-box;
+	        padding: 40px 20px;
+		    font-size: 32px;
+		    text-align: center;
+		    color: #ffffff;
+	        cursor: pointer;
+		}
+		div#count:hover, div#reroll-all:hover {
+		    background: rgba(0,0,0,0.75);
 		}

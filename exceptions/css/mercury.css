@@ -1,0 +1,24 @@
+@keyframes gottagofast {
+    0% 		{margin-left: 0;}
+
+    10% 	{left: 6000px;}
+    20% 	{left: 0;}
+
+    30% 	{left: 6000px;}
+    40% 	{left: 0;}
+
+    50%		{left: 6000px;}
+    60% 	{left: 0;}
+
+    70%		{left: 6000px;}
+    80% 	{left: 0;}
+
+    90%		{left: 6000px;}
+    100% 	{left: 0;}
+}
+
+div#god {
+	position: absolute;
+    animation-name: gottagofast;
+    animation-duration: 5s;
+}

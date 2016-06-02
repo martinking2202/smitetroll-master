@@ -1,0 +1,59 @@
+@keyframes aresPullG {
+    0% 		{top: 0; left: 0;}
+    33% 	{top: -200px; left: -100px;}
+    40% 	{top: 145px; left: 175px;}
+    90% 	{top: 145px; left: 175px;}
+    100% 	{top:0; left: 0;}
+}
+
+@keyframes aresPullI {
+    0%      {top: 0; left: 0;}
+    33%     {top: -200px; right: -100px;}
+    40%     {top: 145px; right: 175px;}
+    90%     {top: 145px; right: 175px;}
+    100%    {top:0; right: 0;}
+}
+
+@keyframes aresPullR {
+    0%      {right: 0;}
+    33%     {right: -300px;}
+    40%     {right: 175px;}
+    90%     {right: 175px;}
+    100%    {right: 0;}
+}
+
+@keyframes aresPullE {
+    0%      {bottom: 0; right: 0;}
+    33%     {bottom: -200px; right: -100px;}
+    40%     {bottom: 145px; right: 175px;}
+    90%     {bottom: 145px; right: 175px;}
+    100%    {bottom:0; right: 0;}
+}
+
+div#god {
+    overflow: visible;
+}
+
+div.god {
+    animation-name: aresPullG;
+    animation-duration: 5s;
+    position: relative;
+}
+
+div.items {
+    animation-name: aresPullI;
+    animation-duration: 5s;
+    position: relative;
+}
+
+div.relics {
+    animation-name: aresPullR;
+    animation-duration: 5s;
+    position: relative;
+}
+
+div#empty-space {
+    animation-name: aresPullE;
+    animation-duration: 5s;
+    position: relative;
+}

@@ -1,0 +1,12 @@
+@keyframes behindyou {
+    0% 		{opacity: 1;}
+    10% 	{opacity: 0;}
+    85% 	{opacity: 0; margin-top: 0;}
+    90% 	{opacity: 1; margin-top: -200px;}
+    100% 	{opacity: 1; margin-top: 0;}
+}
+
+div#god {
+    animation-name: behindyou;
+    animation-duration: 5s;
+}

@@ -1,0 +1,11 @@
+@keyframes backflip {
+    0% 		{transform: rotateX(0)}
+    75%     {transform: rotateX(-360deg);}
+    100% 	{transform: rotateX(-360deg);}
+}
+
+div#god {
+	position: absolute;
+    animation-name: backflip;
+    animation-duration: 3s;
+}
